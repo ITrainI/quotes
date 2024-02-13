@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #f1f1ef;
+            font-family: Dancing Script;
+            text-align: center; /* Zentriert den Text horizontal */
+            padding-top: 3%; /* Platzieren Sie den Text vertikal in der Mitte der Seite */
+            margin: 0; /* Fügt einen Nullrand hinzu, um den Text weiter nach links zu verschieben */
+        }
+        
+        .quote-book {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .quote-content {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .quote-author {
+            font-size: 16px;
+            color: #616161;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-book" id="book"></div>
+    <div class="quote-content" id="quote"></div>
+    <div class="quote-author" id="author"></div>
+
+    <script>
+        var quotes = [
+            {book: "All's Well That Ends Well", quote: "No legacy is so rich as honesty. Good with out evil is like light with out darkness which in turn is like righteousness whith out hope", author: "~William Shakespeare"},
+            {book: "Anna Karenina", quote: "It’s much better to do good in a way that no one knows anything about it", author: "~Leo Tolstoy"},
+            {book: "Anne of Green Gables", quote: "Isn’t it nice to think that tomorrow is a new day with no mistakes in it yet?", author: "~L. M. Montgomery"},
+            {book: "Autumn Leaves", quote: "It is better to be hated for what you are than to be loved for what you are not", author: "~Andre Gide"},
+            {book: "Following the Equator: A Journey Around the World", quote: "Truth is stranger than fiction, but it is because Fiction is obliged to stick to possibilities; Truth isn’t", author: "~Mark Twain"},
+            {book: "Hamlet", quote: "Dreams, indeed, are ambition; for the very substance of the ambitious is merely the shadow of a dream. And I hold ambition of so airy and light a quality, that it is but a shadow's shadow", author: "~William Shakespeare"},
+            {book: "Harry Potter and the Goblet of Fire", quote: "It matters not what someone is born, but what they grow to be", author: "~J. K. Rowling"},
+            {book: "Henry VI", quote: "The trust I have is in mine innocence, And therefore am I bold and resolute", author: "~William Shakespeare"},
+            {book: "Kafka on the Stone", quote: "Memories warm you up from the inside. But they also tear you apart", author: "~Haruki Murakami"},
+            {book: "Much Ado About Nothing", quote: "Silence is the perfectest herald of joy: I were but little happy, if I could say how much", author: "~William Shakespeare"},
+            {book: "Paradise Lost", quote: "The mind is its own place, and in itself can make a heaven of hell, a hell of heaven..", author: "~John Milton"},
+            {book: "The Alabaster Girl", quote: "All beautiful things must end. Otherwise they are not beautiful", author: "~Zan Perrion"},
+            {book: "the Great Gatsby", quote: "The loneliest moment in someone’s life is when they are watching their whole world fall apart, and all they can do is stare blankly", author: "~F. Scott Fitzgerald"},
+            {book: "The Happy Prine and Other Tales", quote: "I am so clever that sometimes I don't understand a single word of what I am saying", author: "~Oscar Wilde"},
+            {book: "The Long Dark Tea-Time of the Soul", quote: "I may not have gone where I intended to go, but I think I have ended up where I needed to be", author: "~Douglas Adams"},
+            {book: "The Notebook", quote: "The reason it hurts so much to separate is because our souls are connected. Maybe they always have been and will be. Maybe we've lived a thousand lives before this one and in each of them we've found each other. And maybe each time, we've been forced apart for the same reasons. That means that this goodbye is both a goodbye for the past ten thousand years and a prelude to what will come", author: "~Nicholas Sparks"},
+            {book: "The Secret the Cheerleader doesn’t know", quote: "No one should need another person to live... they should want that person around to make life better", author: ""},
+            {book: "The Sound And The Fury", quote: "Clocks slay time… time is dead as long as it is being clicked off by little wheels; only when the clock stops does time come to life", author: "~William Faulkner"},
+            {book: "To Kill a Mockingbird", quote: "You never really understand a person until you consider things from his point of view…Until you climb inside of his skin and walk around in it", author: "~Harper Lee"},
+            {book: "True Love", quote: "We’re all a little weird. And life is a little weird. And when we find someone whose weirdness is compatible with ours, we join up with them and fall into mutually satisfying weirdness - and call it love - true love", author: "~Robert Fulghum"},
+            {book: "Winter's Tale", quote: "The silence often of pure innocence Persuades, when speaking fails", author: "~William Shakespeare"},
+            {book: "Sense and Sensibility", quote: "I wish, as well as everybody else, to be perfectly happy; but, like everybody else, it must be in my own way", author: "~Jane Austen"},
+            {book: "A Walk to Remember", quote: "Love is like the wind, you can't see it but you can feel it", author: "~Nicholas Sparks"},
+            {book: "The Perks of Being a Wallflower", quote: "So, this is my life. And I want you to know that I am both happy and sad and I'm still trying to figure out how that could be", author: "~Stephen Chbosky"},
+            {book: "The Picture of Dorian Gray", quote: "You are a wonderful creation. You know more than you think you know, just as you know less than you want to know", author: "~Oscar Wilde"},
+            {book: "Mary, Mary", quote: "That aching feeling of loneliness which always overcomes us when someone dear to us surrenders to a daydream in which we have no place", author: "~Vladimir Nabokov"},
+            {book: "The Catcher in the Rye", quote: "The thing is, if you get very depressed about something, it's hard as hell to swallow", author: "~J. D. Salinger"},
+            {book: "Anna Karenina", quote: "It is dreadful that one cannot tear our the past by the roots. We cannot tear it out but we can hide the memory of it", author: "~Leo Tolstoy"},
+            {book: "Anne of Green Gables", quote: "it’s delightful when your imaginations come true, isn’t it?", author: "~L. M. Montgomery"},
+            {book: "Dear Enemy", quote: "Don't let politeness interfere with truth", author: "~Jean Webster"},
+            {book: "The Tale of Despereaux", quote: "There is nothing sweeter in this sad world than the sound of someone you love calling your name", author: "~Kate DiCamillo"},
+            {book: "The Two Towers", quote: "There is some good in this world, and it’s worth fighting for", author: "~J.R.R Tolkien"},
+            {book: "The Road", quote: "You forget what you want to remember, and you remember what you want to forget", author: "~Cormac McCarthy"},
+            {book: "Never Let Me Go", quote: "Memories, even your most precious ones, fade surprisingly quickly. But I don’t go along with that. The memories I value most, I don’t ever see them fading", author: "~Kazuo Ishiguro"},
+            {book: "The Color Purple", quote: "Time moves slowly, but passes quickly", author: "~Alice Walker"}
+        ];
+
+        function changeQuote() {
+            var quote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('book').textContent = quote.book;
+            document.getElementById('quote').textContent = quote.quote;
+            document.getElementById('author').textContent = quote.author;
+        }
+        changeQuote(); // Zitat beim Laden der Seite ändern
+        setInterval(changeQuote, 5 * 60 * 1000); // Zitat alle 5 Minuten ändern
+    </script>
+</body>
+</html>
